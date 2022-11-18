@@ -5,10 +5,10 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            login!(user)
+            login!(@user)
             redirect_to user_url(@user)
         else
-            flash.now[:errors] = @user.errors.full_messages, status: 422
+            flash.now[:errors] = @user.errors.full_messages
             render :new
         end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        
+
     end
 
     def edit
@@ -44,6 +44,6 @@ class UsersController < ApplicationController
 
     def grab_user
         @user = User.find_by(id: params[:id])
-     
+
     end
 end

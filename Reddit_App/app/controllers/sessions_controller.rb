@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if @user
       login(user)
-      user_url(@user)
+      redirect_to user_url(@user)
     else
       flash[:errors] = @user.errors.full_messages
       redirect_to new_session_url
