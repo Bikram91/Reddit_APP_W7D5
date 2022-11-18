@@ -40,6 +40,7 @@ class SubsController < ApplicationController
     @sub = Sub.find(params[:id])
   end
 
+  private
   def sub_params
     params.require(:sub).permit(:name, :description)
   end
