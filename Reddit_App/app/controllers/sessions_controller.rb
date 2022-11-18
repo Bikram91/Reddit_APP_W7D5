@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 
     if @user
-      login(user)
+      login!(@user)
       redirect_to user_url(@user)
     else
       flash[:errors] = @user.errors.full_messages

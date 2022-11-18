@@ -17,6 +17,12 @@ class User < ApplicationRecord
 
     before_validation :ensure_session_token
 
+
+    has_many :subs, 
+    class_name: :Sub, 
+    foreign_key: :moderator_id
+
+    
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
         
@@ -39,11 +45,13 @@ class User < ApplicationRecord
 
     def reset_session_token
         self.session_token = generate_session_token
+        self.save!
+        self.session_token
     end
 
     def generate_session_token
         token = SecureRandom::urlsafe_base64
-        while User.exists?(token)
+        while User.exists?(session_token: token)
             token = SecureRandom::urlsafe_base64
         end
         token

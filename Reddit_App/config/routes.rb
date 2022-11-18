@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   resource :session, only:[:new, :create, :destroy]
 
+  resources :subs, except:[:destroy] 
+  resources :posts, except:[:destroy, :index]
+
 end
